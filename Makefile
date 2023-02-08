@@ -13,8 +13,8 @@ RESET   	=	\033[0m
 KERNEL_BIN	=	build/our_kfs.bin
 KERNEL_ISO	=	build/our_kfs.iso
 
-BOOT		=	srcs/boot/boot.s
-KERNEL		=	srcs/kernel/kernel.c
+BOOT		=	srcs/boot/boot.asm
+KERNEL		=	srcs/kernel/kernel.asm
 LINKER		=	srcs/linker.ld
 
 FLAGS		=	-fno-builtin -nostdlib -nodefaultlibs -ffreestanding
@@ -23,26 +23,13 @@ all: build
 
 build:
 	mkdir -p build
-	nasm -f elf32 ${BOOT} -o build/boot.o
-	echo "HERE"
-	# i686-elf-as ${BOOT} -o build/boot.o
-	# gcc -m32 ${FLAGS} -c ${KERNEL} -o build/kernel.o
-	i686-elf-gcc -c ${KERNEL} -o build/kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-	# ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o
-	i686-elf-gcc -T ${LINKER} -o ${KERNEL_BIN} -ffreestanding -O2 -nostdlib build/boot.o build/kernel.o -lgcc
+	nasm -felf32 ${BOOT} -o build/boot.o
+	nasm -felf32 ${KERNEL} -o build/kernel.o
+	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o
 
 
 run: build
 	qemu-system-i386 -kernel ${KERNEL_BIN} -monitor stdio
-
-iso: build
-	mkdir -p build/iso/boot/grub
-	cp srcs/grub.cfg build/iso/boot/grub
-	cp ${KERNEL_BIN} build/iso/boot
-	grub-mkrescue -o ${KERNEL_ISO} build/iso
-
-run-iso: iso
-	qemu-system-i386 -cdrom ${KERNEL_ISO}
 
 clean:
 	rm -rf $(KERNEL_BIN) $(KERNEL_ISO)
