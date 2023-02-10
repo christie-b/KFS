@@ -25,8 +25,9 @@ build:
 	mkdir -p build
 	nasm -felf32 ${BOOT} -o build/boot.o
 	# nasm -felf32 ${KERNEL} -o build/kernel.o
-	gcc -m32 -ffreestanding ${FLAGS} -c ${KERNEL} -o build/kernel.o
-	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o -nostdlib -lgcc
+	# i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+	gcc -m32 ${FLAGS} -c ${KERNEL} -o build/kernel.o
+	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o -nostdlib
 
 
 run: build
