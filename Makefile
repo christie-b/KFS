@@ -33,6 +33,16 @@ build:
 run: build
 	qemu-system-i386 -kernel ${KERNEL_BIN} -monitor stdio
 
+iso: build
+	mkdir -p build/iso/boot/grub
+	cp srcs/grub.cfg build/iso/boot/grub
+	cp ${KERNEL_BIN} build/iso/boot
+	grub-mkrescue -o ${KERNEL_ISO} build/iso
+
+run-iso: iso
+	qemu-system-i386 -cdrom ${KERNEL_ISO}
+
+
 clean:
 	rm -rf $(KERNEL_BIN) $(KERNEL_ISO)
 
