@@ -10,8 +10,8 @@ CHECKSUM equ -(MAGIC + MBFLAGS)   ; checksum of above, to prove we are multiboot
 ; search for this signature in the first 8 KiB of the kernel file, aligned at a
 ; 32-bit boundary. The signature is in its own section so the header can be
 ; forced to be within the first 8 KiB of the kernel file.
-section .multiboot
-align 4
+section .multiboot ;Debut de la section multiboot pour le bootloader (programme qui boot les OS sur le PC)
+align 4 ; aligne les informations a 32 bits (4 x 8)
 	dd MAGIC
 	dd MBFLAGS
 	dd CHECKSUM
@@ -26,18 +26,18 @@ align 4
 ; System V ABI standard and de-facto extensions. The compiler will assume the
 ; stack is properly aligned and failure to align the stack will result in
 ; undefined behavior.
-section .bss
-align 16
+section .bss ; La section .bss (block starting symbol) declare les variables statiques allouées mais non assignées
+align 16 ; alignement a 16 pour respecter la norme System V ABI (sinon crash)
 stack_bottom:
-resb 16384 ; 16 KiB
+resb 16384 ; 16 KiB ; Declaration de 16Kb de stockage non utilisé pour l'instant
 stack_top:
  
 ; The linker script specifies _start as the entry point to the kernel and the
 ; bootloader will jump to this position once the kernel has been loaded. It
 ; doesn't make sense to return from this function as the bootloader is gone.
 ; Declare _start as a function symbol with the given symbol size.
-section .text
-global _start:function (_start.end - _start)
+section .text ; section ou est declaré le code
+global _start:function (_start.end - _start) ; voir linker -> entrypoint du programme
 _start:
 	; The bootloader has loaded us into 32-bit protected mode on a x86
 	; machine. Interrupts are disabled. Paging is disabled. The processor
@@ -70,9 +70,10 @@ _start:
 	; aligned above and we've since pushed a multiple of 16 bytes to the
 	; stack since (pushed 0 bytes so far) and the alignment is thus
 	; preserved and the call is well defined.
-        ; note, that if you are building on Windows, C functions may have "_" prefix in assembly: _kernel_main
-	extern kernel_main
-	call kernel_main
+    ; note, that if you are building on Windows, C functions may have "_" prefix in assembly: _kernel_main
+
+	extern kernel_main ; Declaration du symbole externe comme existant dans un autre module (ici kernel.c)
+	call kernel_main ; appel de la fonction
  
 	; If the system has nothing more to do, put the computer into an
 	; infinite loop. To do that:
@@ -84,7 +85,8 @@ _start:
 	;    Since they are disabled, this will lock up the computer.
 	; 3) Jump to the hlt instruction if it ever wakes up due to a
 	;    non-maskable interrupt occurring or due to system management mode.
-	cli
-.hang:	hlt
+
+	cli ; clear interrupts 
+.hang:	hlt ; boucle infinie, si interruption, on jump a la boucle
 	jmp .hang
-.end:
+.end: ; fin d'un programme assembleur

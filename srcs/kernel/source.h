@@ -1,5 +1,5 @@
-#ifndef SOURCE_DOT_H    /* This is an "include guard" */
-#define SOURCE_DOT_H    /* prevents the file from being included twice. */
+#ifndef SOURCE_H
+#define SOURCE_H
 
 #define VGA_ADDRESS 0xB8000   
 
@@ -10,4 +10,4 @@ void print_string(char* str, unsigned char color);
 void print_char(char str, unsigned char color);
 void clear_screen(void);
 
-#endif /* FOO_DOT_H */
+#endif

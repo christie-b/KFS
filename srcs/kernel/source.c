@@ -1,7 +1,5 @@
 #include "source.h"  
 
-#define VGA_ADDRESS 0xB8000 
-
 unsigned short* terminal_buffer;
 unsigned int vga_index;
 
