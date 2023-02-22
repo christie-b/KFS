@@ -48,12 +48,6 @@ static char keyboard_shift_mapping[128] = {
     '6', 0, 0, 0, 0, 0
 };
 
-unsigned char get_scancode()
-{
-    unsigned char inputdata;
-    inputdata = inb(0x60);
-    return inputdata;
-}
 uint16_t keyboard_handler()
 {
     uint16_t scancode = 0;
