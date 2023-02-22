@@ -31,5 +31,4 @@ void print_char(char str, unsigned char color)
     terminal_buffer[vga_index] = str | (unsigned short)color << 8;
     index++;
     vga_index++;
-    
 }
