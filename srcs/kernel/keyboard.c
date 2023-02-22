@@ -54,6 +54,23 @@ unsigned char get_scancode()
     return inputdata;
 }
 
+char last_char(void)
+{
+    char c = last;
+    last = 0;
+    return c;
+}
+
+void clear_previous_char(void)
+{
+    if (vga_index - 1 > 0)
+    {
+        set_vga_index(vga_index - 1);
+        terminal_buffer[vga_index] = BLANK;
+        move_left();
+    }
+}
+
 void keyboard_handler()
 {
     unsigned char scancode;
@@ -103,22 +120,116 @@ void keyboard_handler()
     return ;
 }
 
-/*
-char get_char(void)
+void set_vga_index(unsigned int index)
 {
-    uint16_t      keycode = 0;
+    vga_index = index;
 
-    keycode = keyboard_handler();
-    if (keycode == 0)
-        return 0;
-    if (GET_KEY_STATUS(keystatus, SHIFT_BIT) || GET_KEY_STATUS(keystatus, CAPSLOCK_BIT))
+    if (vga_index >= VGA_WIDTH * VGA_HEIGHT)
     {
-            return keyboard_shift_mapping[keycode];
+        set_cursor_pos((uint16_t)((VGA_WIDTH * VGA_HEIGHT) - VGA_WIDTH) + (vga_index % VGA_WIDTH));
     }
     else
     {
-        return keyboard_mapping[keycode];
+        set_cursor_pos((uint16_t)vga_index);
     }
 }
+
+static void move_right_buffer(char *buffer, int size, int index)
+{
+    while (size > index) {
+        buffer[size] = 0;
+        buffer[size] = buffer[size - 1];
+        size--;
+    }
+
+}
+
+static void move_left_buffer(char *buffer, int size, int index)
+{
+    while (index < size) {
+        buffer[index] = 0;
+        buffer[index] = buffer[index + 1];
+        index++;
+    }
+
+}
+
+void get_line(char *buffer, unsigned int buffer_limit)
+{
+    char                key = 0;
+    unsigned int        i = 0;
+
+    while (true)
+    {
+        key = last_char();
+        if (key == 0)
+        {
+            continue;
+        }
+        else if (key < 0)
+        {
+            if (key == LEFT_ARROW)
+            {
+                if (i > 0)
+                {
+                    set_vga_index(vga_index - 1);
+                    i--;
+                }
+            }
+            else if (key == RIGHT_ARROW)
+            {
+                if (i < strlen(buffer))
+                {
+                    set_vga_index(vga_index + 1);
+                    i++;
+                }
+            }
+            continue;
+        }
+        else if (key == '\n')
+        {
+            kputchar(key, VGA_COLOR_WHITE);
+            return;
+        }
+        else if (GET_KEY_STATUS(get_keystatus(), CONTROL_BIT))
+        {
+            if (key == 'l') {
+                memset(buffer, 0, 256);
+                clear_screen();
+                return;
+            }
+        }
+        else if (key == '\b')
+        {
+            if (strlen(buffer) > 0 && i > 0)
+            {
+                clear_previous_char();
+                buffer[i - 1] = 0;
+                i--;
+                move_left_buffer(buffer, buffer_limit, i);
+            }
+        }
+        else {
+            k_putchar(key, VGA_COLOR_WHITE);
+            move_right_buffer(buffer, buffer_limit, i);
+            buffer[i] = key;
+            if (strlen(buffer) == buffer_limit) {
+                return;
+            }
+            i++;
+        }
+    }
+}
+
+char init_keyboard(void)
+{
+    char buffer[256];
+    while (true)
+    {
+        k_putstr("42>");
+        k_memset(buffer, 0, 256);
+        get_line(buffer, 256);
+    }
+}
+
 // https://meepy.medium.com/creating-a-kernel-from-scratch-1a1aa569780f
-*/

@@ -25,6 +25,9 @@ enum vga_color {
 	VGA_COLOR_WHITE = 15,
 };
 
+#define VGA_WIDTH 25
+#define VGA_HEIGHT 80
+
 void terminal_initialize(void);
 void terminal_setcolor(uint8_t color);
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y);

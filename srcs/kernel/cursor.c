@@ -1,6 +1,4 @@
-#include "source.h"
-#include "kfunctions.h"
-#include "io.h"
+//https://wiki.osdev.org/Text_Mode_Cursor
 
 uint16_t get_cursor_pos()
 {

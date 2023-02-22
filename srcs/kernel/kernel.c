@@ -35,9 +35,6 @@ size_t strlen(const char* str)
 		len++;
 	return len;
 }
-// Declaration des constantes (longueur des lignes et nombre maximum de lignes affichees?)
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
 
  // Declaration des variables globales necessaires
  // (numero de la rangee actuelle, numero de la colonne actuelle, couleur du terminal et buffer de tout ce qui est entré dans le terminal

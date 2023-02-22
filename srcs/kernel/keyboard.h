@@ -8,11 +8,15 @@
 # define GET_RELEASED_KEY(keycode) keycode ^ 0x80
 
 # define SHIFT_BIT              1
-# define SHIFT                 -1
+# define SHIFT                  -1
 # define CONTROL_BIT            2
-# define CONTROL               -2
+# define CONTROL                -2
 # define CAPSLOCK_BIT           3
 # define CAPSLOCK               -3
+# define LEFT_ARROW             -10
+# define RIGHT_ARROW            -11
+
+#define BLANK ' ' | (((BLACK << 4) | (WHITE & 0x0F)) << 8)
 
 unsigned char get_scancode();
 void keyboard_handler();

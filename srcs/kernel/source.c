@@ -1,7 +1,7 @@
 #include "source.h"  
 
 unsigned short* terminal_buffer;
-unsigned int vga_index;
+unsigned int vga_index = 0;
 
 void clear_screen(void)
 {
