@@ -28,7 +28,7 @@ build:
 	# i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 	gcc -m32 ${FLAGS} -c ${KERNEL} -o build/kernel.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/cursor/cursor.c -o build/cursor.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/io.c -o build/io.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/io/io.c -o build/io.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/keyboard/keyboard.c -o build/keyboard.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/kfunctions/kfunctions.c -o build/kfunctions.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/shell/shell.c -o build/shell.o

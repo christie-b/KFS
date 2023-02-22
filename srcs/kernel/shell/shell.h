@@ -1,7 +1,7 @@
 #ifndef SHELL_H
 #define SHELL_H
 
-# include "kernel.h"
+# include "../kernel.h"
 
 char            init_shell();
 void            get_line(char *buffer, unsigned int buffer_limit);

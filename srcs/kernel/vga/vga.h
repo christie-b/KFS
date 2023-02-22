@@ -1,7 +1,7 @@
 #ifndef VGA_H
 #define VGA_H
 
-#include "kernel.h"
+#include "../kernel.h"
 
 extern unsigned short* 	terminal_buffer;
 extern unsigned int 	vga_index;

@@ -52,7 +52,7 @@ uint16_t keyboard_handler()
         {
             UNSET_STATUS(keystatus, CONTROL_BIT);
         }
-        return ;
+        return 0;
     }
     else // Key is pressed
     {
@@ -60,7 +60,7 @@ uint16_t keyboard_handler()
         // Between 0 and 128 
         if (scancode > 128)
         {
-            return ;
+            return 0;
         }
         // Special Keys : shift, control, capslock
         if (keyboard_mapping[scancode] == SHIFT)
@@ -93,7 +93,7 @@ char get_key(void)
     key = keyboard_handler();
     if (key == 0)
         return 0;
-    if (GET_KEY_STATUS(keystatus, SHIFT_BIT) || GET_KEY_STATUS(keystatus, CAPSLOCK_BIT))
+    if (GET_STATUS(keystatus, SHIFT_BIT) || GET_STATUS(keystatus, CAPSLOCK_BIT))
     {
         return keyboard_shift_mapping[key];
     }
@@ -107,14 +107,14 @@ static void keyboard()
     {
         key = get_key();
         if (key != 0)
-            last_char = key;
+            last = key;
     }
 }
 
 
 void init_keyboard()
 {
-    register_interrupt_handler(IRQ1, &keyboard);
+    //register_interrupt_handler(IRQ1, &keyboard);
 }
 
 // https://meepy.medium.com/creating-a-kernel-from-scratch-1a1aa569780f

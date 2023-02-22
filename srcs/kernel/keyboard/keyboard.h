@@ -1,7 +1,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H 
 
-# include "kernel.h"
+# include "../kernel.h"
 
 # define RELEASED(keycode) keycode & 0x80
 # define GET_STATUS(status, key) (status >> key) & 1

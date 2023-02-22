@@ -5,12 +5,12 @@
 # include <stdint.h>
 # include <stdbool.h>
 
-# include "cursor.h"
-# include "io.h"
-# include "keyboard.h"
-# include "kfunctions.h"
-# include "shell.h"
-# include "vga.h"
+# include "cursor/cursor.h"
+# include "io/io.h"
+# include "keyboard/keyboard.h"
+# include "kfunctions/kfunctions.h"
+# include "shell/shell.h"
+# include "vga/vga.h"
 
 /* Hardware text mode color constants. */
 enum vga_color

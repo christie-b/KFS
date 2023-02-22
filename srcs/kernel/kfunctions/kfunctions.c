@@ -10,14 +10,14 @@ unsigned int k_strlen(const char *str)
 	return (i);
 }
 
-void	*k_memset(void *buffer, int char, unsigned int len)
+void	*k_memset(void *buffer, int ch, unsigned int len)
 {
 	unsigned int	i;
 
 	i = 0;
 	while (i < len)
     {
-		((char *)(buffer))[i] = char;
+		((char *)(buffer))[i] = ch;
         i++;
     }
     return buffer;
