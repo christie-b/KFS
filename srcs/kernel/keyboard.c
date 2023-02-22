@@ -54,14 +54,14 @@ unsigned char get_scancode()
     return inputdata;
 }
 
-char last_char(void)
+char last_char()
 {
     char c = last;
     last = 0;
     return c;
 }
 
-void clear_previous_char(void)
+void clear_previous_char()
 {
     if (vga_index - 1 > 0)
     {
@@ -136,7 +136,8 @@ void set_vga_index(unsigned int index)
 
 static void move_right_buffer(char *buffer, int size, int index)
 {
-    while (size > index) {
+    while (size > index)
+    {
         buffer[size] = 0;
         buffer[size] = buffer[size - 1];
         size--;
@@ -146,7 +147,8 @@ static void move_right_buffer(char *buffer, int size, int index)
 
 static void move_left_buffer(char *buffer, int size, int index)
 {
-    while (index < size) {
+    while (index < size)
+    {
         buffer[index] = 0;
         buffer[index] = buffer[index + 1];
         index++;
@@ -221,7 +223,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
     }
 }
 
-char init_keyboard(void)
+char init_keyboard()
 {
     char buffer[256];
     while (true)

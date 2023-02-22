@@ -4,6 +4,8 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include "kfunctions.h"
+# include "keyboard.h"
 
 /* Hardware text mode color constants. */
 enum vga_color {
