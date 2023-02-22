@@ -17,8 +17,7 @@ BOOT		=	srcs/boot/boot.asm
 KERNEL		=	srcs/kernel/kernel.c
 LINKER		=	srcs/linker.ld
 
-FLAGS		=	-fno-builtin -nostdlib -nodefaultlibs -ffreestanding -fno-exceptions -fno-stack-protector
-# -fno-rtti is for C++
+FLAGS		=	-fno-builtin -nostdlib -nodefaultlibs -ffreestanding -fno-exceptions -fno-stack-protector # -fno-rtti is for C++
 
 all: build
 

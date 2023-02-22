@@ -62,7 +62,7 @@ void terminal_initialize(void)
 	(Assuming text mode and assuming the mapped address is not changed)
 	*/
 
-		//Ensuite on remplit le buffer d'espaces (chacun des 80 caracteres des 25 lignes disponibles)
+	//Ensuite on remplit le buffer d'espaces (chacun des 80 caracteres des 25 lignes disponibles)
 	for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
 			index = y * VGA_WIDTH + x;
@@ -118,12 +118,9 @@ void kernel_main(void)
     print_string("42\n", VGA_COLOR_BLUE);
 	//On pourrait aussi
 	//terminal_write("42\n", strlen("42\n")); ou stocker la chaine dans une var
-	while (1) {
-
-
+	while (1)
+	{
         keyboard_handler();
-
-
     }
     // print_string(" ___   ___    _______     \n", RED);
     // print_string("\\|\\  \\ |\\  \\  /  ___  \\    \n", RED);

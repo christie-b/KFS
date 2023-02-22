@@ -3,7 +3,7 @@ FROM debian:buster
 COPY . /KFS
 
 
-RUN apt-get update\
+RUN apt-get update \
 	&& apt-get install build-essential -y \
 	&& apt-get install clang -y \
 	&& apt-get install gcc -y \
