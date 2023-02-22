@@ -18,10 +18,9 @@
 
 #define BLANK ' ' | (((BLACK << 4) | (WHITE & 0x0F)) << 8)
 
-unsigned char get_scancode();
-void keyboard_handler();
-
-
+uint16_t keyboard_handler();
+char get_key(void);
+static void keyboard();
 char last_char();
 void clear_previous_char();
 void set_vga_index(unsigned int index);
@@ -29,4 +28,9 @@ static void move_right_buffer(char *buffer, int size, int index);
 static void move_left_buffer(char *buffer, int size, int index);
 void get_line(char *buffer, unsigned int buffer_limit);
 char init_keyboard();
+
+//https://forum.osdev.org/viewtopic.php?f=1&t=28437#:~:text=To%20get%20input%20from%20the,to%20terminate%20the%20interrupt%20cleanly.
+//https://wiki.osdev.org/Text_Mode_Cursor
+//https://wiki.osdev.org/Creating_A_Shell
+
 #endif

@@ -117,6 +117,7 @@ void kernel_main(void)
 	//terminal_write("42\n", strlen("42\n")); ou stocker la chaine dans une var
 	while (1)
 	{
+		keyboard();
         init_keyboard();
     }
     // print_string(" ___   ___    _______     \n", RED);

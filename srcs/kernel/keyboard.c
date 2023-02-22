@@ -18,6 +18,7 @@
 //   0,
 // };
 // https://stackoverflow.com/questions/2746817/what-does-the-0x80-code-mean-when-referring-to-keyboard-controls
+//https://forum.osdev.org/viewtopic.php?f=1&t=28437#:~:text=To%20get%20input%20from%20the,to%20terminate%20the%20interrupt%20cleanly.
 
 #include "kernel.h"  
 #include "keyboard.h"  
@@ -53,27 +54,9 @@ unsigned char get_scancode()
     inputdata = inb(0x60);
     return inputdata;
 }
-
-char last_char()
+uint16_t keyboard_handler()
 {
-    char c = last;
-    last = 0;
-    return c;
-}
-
-void clear_previous_char()
-{
-    if (vga_index - 1 > 0)
-    {
-        set_vga_index(vga_index - 1);
-        terminal_buffer[vga_index] = BLANK;
-        move_left();
-    }
-}
-
-void keyboard_handler()
-{
-    unsigned char scancode;
+    uint16_t scancode = 0;
 
     scancode = inb(0x60);
     if (RELEASED(scancode)) // Key is realeased
@@ -117,7 +100,51 @@ void keyboard_handler()
             }
         }
     }
-    return ;
+    return scancode;
+}
+
+char get_key(void)
+{
+    uint16_t key = 0;
+
+    key = keyboard_handler();
+    if (key == 0)
+        return 0;
+    if (GET_KEY_STATUS(keystatus, SHIFT_BIT) || GET_KEY_STATUS(keystatus, CAPSLOCK_BIT))
+    {
+        return keyboard_shift_mapping[key];
+    }
+    return keyboard_mapping[key];
+}
+
+static void keyboard()
+{
+    char key;
+    while (true)
+    {
+        key = get_key();
+        if (key != 0)
+            last_char = key;
+    }
+}
+
+//-----------------------------------
+
+char last_char()
+{
+    char c = last;
+    last = 0;
+    return c;
+}
+
+void clear_previous_char()
+{
+    if (vga_index - 1 > 0)
+    {
+        set_vga_index(vga_index - 1);
+        terminal_buffer[vga_index] = BLANK;
+        move_left();
+    }
 }
 
 void set_vga_index(unsigned int index)
