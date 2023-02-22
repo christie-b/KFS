@@ -22,9 +22,6 @@
 
 char            last_char();
 char            keystatus_getter();
-uint16_t        keyboard_handler();
-char            get_key();
-static void     keyboard(t_registers regs);
 void            init_keyboard();
 
 #endif
