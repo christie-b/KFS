@@ -37,7 +37,7 @@ build:
 	gcc -m32 ${FLAGS} -c srcs/kernel/kfunctions/kfunctions.c -o build/kfunctions.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/shell/shell.c -o build/shell.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/vga/vga.c -o build/vga.o
-	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/cursor.o build/handler.o build/idt.o build/irq.o build.isr.o build/io.o build/keyboard.o build/kfunctions.o build/shell.o build/vga.o -nostdlib
+	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/cursor.o build/handler.o build/idt.o build/irq.o build/isr.o build/io.o build/keyboard.o build/kfunctions.o build/shell.o build/vga.o -nostdlib
 	# ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/keyboard.o -nostdlib
 
 
