@@ -105,7 +105,7 @@ static void keyboard(t_registers regs)
     (void)regs;
     char key;
     key = get_key();
-    k_putchar(key);
+    k_putchar(key, VGA_COLOR_GREEN);
     if (key != 0)
         last = key;
 }
