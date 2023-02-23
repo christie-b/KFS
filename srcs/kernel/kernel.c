@@ -1,7 +1,3 @@
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
-
 #include "kernel.h"
  
 /* Check if the compiler thinks you are targeting the wrong operating system. */
@@ -105,9 +101,10 @@ void kernel_main(void)
 {
 	index = 0;
 
-	terminal_initialize();
+	//terminal_initialize();
 	
-    k_putstr("42\n", VGA_COLOR_RED);
-    k_putstr("42\n", VGA_COLOR_BLUE);
+	init_idt();
+ 	enable_interrupts();
 	init_keyboard();
+	init_shell();
 }

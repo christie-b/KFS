@@ -6,6 +6,7 @@
 # include <stdbool.h>
 
 # include "cursor/cursor.h"
+# include "handler/handler.h"
 # include "io/io.h"
 # include "keyboard/keyboard.h"
 # include "kfunctions/kfunctions.h"

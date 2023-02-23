@@ -114,7 +114,7 @@ static void keyboard()
 
 void init_keyboard()
 {
-    //register_interrupt_handler(IRQ1, &keyboard);
+    register_interrupt_handler(IRQ1, &keyboard);
 }
 
 // https://meepy.medium.com/creating-a-kernel-from-scratch-1a1aa569780f
