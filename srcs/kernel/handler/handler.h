@@ -113,7 +113,7 @@ void irq_handler(t_registers regs);
 void isr_handler(t_registers regs);
 
 // IDT
-void set_idt_gate(int n, uint32_t handler);
+void set_idt_gate(int n, uint32_t handler, uint32_t selector, uint32_t flags);
 void init_idt();
 
 #endif
