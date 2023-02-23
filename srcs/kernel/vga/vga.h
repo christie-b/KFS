@@ -7,8 +7,10 @@ extern unsigned short* 	terminal_buffer;
 extern unsigned int 	vga_index;
 
 void            clear_screen();
-void            move_left(int nb);
-void            move_right(int nb);
+void            move_right();
+void            move_left();
+void            move_cursor_left(int nb);
+void            move_cursor_right(int nb);
 void            clear_previous_char();
 void            set_vga_index(unsigned int index);
 

@@ -10,13 +10,21 @@ unsigned int k_strlen(const char *str)
 	return (i);
 }
 
-unsigned int k_intlen(const int *buf)
+unsigned int k_intlen(int n)
 {
-	unsigned int i;
+	int		i;
 
-	i = 0;
-	while (buf && buf[i])
+	i = 1;
+    if (n < 0)
+    {
+        n = -n;
+        i++;
+    }
+	while (n >= 10)
+	{
+		n = n / 10;
 		i++;
+	}
 	return (i);
 }
 
@@ -61,7 +69,7 @@ void k_itoa(int n, char *str)
 
 void k_putnbr(int n, unsigned char color)
 {
-    char    str[intlen(n) + 1];
+    char    str[k_intlen(n) + 1];
 
     k_itoa(n, str);
     k_putstr(str, color);

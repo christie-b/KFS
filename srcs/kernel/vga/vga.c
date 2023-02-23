@@ -40,7 +40,7 @@ void clear_previous_char()
     }
 }
 
-void move_right(void)
+void move_right()
 {
     unsigned int last;
 
@@ -54,7 +54,7 @@ void move_right(void)
 
 }
 
-void move_left(void)
+void move_left()
 {
     unsigned int cur;
 
