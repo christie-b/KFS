@@ -33,7 +33,6 @@ void get_line(char *buffer, unsigned int buffer_limit)
     while (1)
     {
         key = last_char();
-        k_putchar(key, VGA_COLOR_WHITE);
         if (key == 0)
         {
             continue;
@@ -84,7 +83,6 @@ void get_line(char *buffer, unsigned int buffer_limit)
         }
         else
         {
-            k_putchar('a', VGA_COLOR_WHITE);
             k_putchar(key, VGA_COLOR_WHITE);
             move_right_buffer(buffer, buffer_limit, i);
             buffer[i] = key;

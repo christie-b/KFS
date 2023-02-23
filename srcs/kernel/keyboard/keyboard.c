@@ -33,9 +33,9 @@ char keystatus_getter()
 
 char last_char()
 {
-    char c = last;
+    char ret = last;
     last = 0;
-    return c;
+    return ret;
 }
 
 uint16_t keyboard_handler()
@@ -107,7 +107,9 @@ static void keyboard(t_registers regs)
     char key;
     key = get_key();
     if (key != 0)
+    {
         last = key;
+    }
 }
 
 
