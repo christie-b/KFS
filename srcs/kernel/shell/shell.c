@@ -94,7 +94,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
 char init_shell()
 {
     char buffer[256];
-    while (true)
+    while (1)
     {
         k_putstr("42>", VGA_COLOR_RED);
         k_memset(buffer, 0, 256);
