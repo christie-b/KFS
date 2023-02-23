@@ -10,41 +10,10 @@ char keystatus = 0;
 static char keyboard_mapping[128] =
 {
 	0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',  '-', '=', '\b', '\t',
-    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', CONTROL, 'a', 's',
-	'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`', SHIFT,'\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/',
-	SHIFT,      /* right shift */ '*', 0,              /* alt */ ' ',            /* space */
-	CAPSLOCK,   /* caps lock */
-	0,              /* F1 */
-	0,              /* F2 */
-	0,              /* F3 */
-	0,              /* F4 */
-	0,              /* F5 */
-    0,              /* F6 */
-	0,              /* F7 */
-	0,              /* F8 */
-	0,              /* F9 */
-	0,              /* F10 */
-	0,              /* num lock */
-	0,              /* scroll lock */
-	0,              /* HOME */
-	0,              /* up arrow */
-	0,              /* PAGEUP */
-	'-',
-	LEFT_ARROW, /* left arrow */
-	0,
-	RIGHT_ARROW,/* right arrow */
-	'+',
-	0,              /* END */
-	0,              /* down arrow */
-	0,              /* PAGEDOWN */
-	0,              /* INSERT */
-	0,              /* DEL */
-	0,
-	0,
-	0,
-	0,              /* F11 */
-	0,              /* F12 */
-	0               /* undefined keys */
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', CONTROL, 'a',
+    's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`', SHIFT,'\\', 'z', 'x', 'c',
+    'v', 'b', 'n', 'm', ',', '.', '/',  SHIFT, '*', 0,' ', CAPSLOCK, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, '-', LEFT_ARROW, 0, RIGHT_ARROW, '+', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 
 };
 
 static char keyboard_shift_mapping[128] =
