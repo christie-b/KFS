@@ -59,7 +59,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
             k_putchar(key, VGA_COLOR_WHITE);
             return;
         }
-        else if (GET_KEY_STATUS(keystatus_getter(), CONTROL_BIT))
+        else if (GET_STATUS(keystatus_getter(), CONTROL_BIT))
         {
             if (key == 'l')
             {

@@ -40,6 +40,35 @@ void clear_previous_char()
     }
 }
 
+void scroll_up()
+{
+    unsigned int previous_line;
+    int i;
+
+    previous_line = 0;
+    i = VGA_WIDTH;
+    while (i < VGA_COUNT) {
+        clear_line(previous_line);
+        copy_line(previous_line, i);
+        previous_line = i;
+        i += VGA_WIDTH;
+    }
+    clear_line(VGA_COUNT - VGA_WIDTH);
+    set_vga_index(VGA_COUNT - VGA_WIDTH);
+}
+
+void newline()
+{
+    if (vga_index / VGA_WIDTH >= VGA_HEIGHT - 1)
+    {
+        scroll_up();
+    }
+    else
+    {
+        set_vga_index(VGA_WIDTH * (vga_index / VGA_WIDTH + 1));
+    }
+}
+
 void move_right()
 {
     unsigned int last;
