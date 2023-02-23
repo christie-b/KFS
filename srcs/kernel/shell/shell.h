@@ -3,7 +3,7 @@
 
 # include "../kernel.h"
 
-char            init_shell();
+void            init_shell();
 void            get_line(char *buffer, unsigned int buffer_limit);
 static void     move_left_buffer(char *buffer, int size, int index);
 static void     move_right_buffer(char *buffer, int size, int index);

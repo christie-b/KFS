@@ -91,7 +91,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
     }
 }
 
-char init_shell()
+void init_shell()
 {
     char buffer[256];
     while (1)
