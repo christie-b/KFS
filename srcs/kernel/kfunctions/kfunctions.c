@@ -1,4 +1,5 @@
 #include "kfunctions.h"
+#include "vga.h"
 
 unsigned int k_strlen(const char *str)
 {
