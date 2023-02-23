@@ -12,10 +12,7 @@ static char keyboard_mapping[128] =
 	0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',  '-', '=', '\b', '\t',
     'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', CONTROL, 'a', 's',
 	'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`', SHIFT,'\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/',
-	SHIFT,      /* right shift */
-	'*',
-	0,              /* alt */
-	' ',            /* space */
+	SHIFT,      /* right shift */ '*', 0,              /* alt */ ' ',            /* space */
 	CAPSLOCK,   /* caps lock */
 	0,              /* F1 */
 	0,              /* F2 */
