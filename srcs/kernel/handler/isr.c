@@ -1,4 +1,6 @@
 #include "handler.h"
+#include "../io/io.h"
+#include "../kfunctions/kfunctions.h"
 
 extern t_interrupt_handler_func_ptr interrupt_handlers[256];
 

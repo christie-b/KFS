@@ -1,4 +1,6 @@
 #include "shell.h"
+#include "../keyboard/keyboard.h"
+#include "../kfunctions/kfunctions.h"
 
 static void move_right_buffer(char *buffer, int size, int index)
 {

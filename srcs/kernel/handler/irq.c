@@ -1,4 +1,6 @@
 #include "handler.h"
+#include "../io/io.h"
+#include "../kfunctions/kfunctions.h"
 
 // le pic est responsable des interruptions liees au hardware, on le remap car de base,
 // elles sont set aux 8 premieres gate de la table d'interruption et ca rentre en conflit avec les gates reservees par le cpu

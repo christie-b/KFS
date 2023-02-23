@@ -1,4 +1,5 @@
 #include "cursor.h"
+#include "../io/io.h"
 
 uint16_t get_cursor_pos()
 {

@@ -1,4 +1,5 @@
 #include "keyboard.h"
+#include "../io/io.h"
 #include "../handler/handler.h"
 
 char last = 0;
