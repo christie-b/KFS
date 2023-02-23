@@ -32,8 +32,8 @@ build:
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/idt.c -o build/idt.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/irq.c -o build/irq.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/isr.c -o build/isr.o
-	nasm -felf32 scrs/kernel/handler/irq.asm -o build/irqasm.o
-	nasm -felf32 scrs/kernel/handler/isr.asm -o build/israsm.o
+	nasm -felf32 srcs/kernel/handler/irq.asm -o build/irqasm.o
+	nasm -felf32 srcs/kernel/handler/isr.asm -o build/israsm.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/io/io.c -o build/io.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/keyboard/keyboard.c -o build/keyboard.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/kfunctions/kfunctions.c -o build/kfunctions.o
