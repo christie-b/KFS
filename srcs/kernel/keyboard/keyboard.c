@@ -86,7 +86,7 @@ uint16_t keyboard_handler()
     return scancode;
 }
 
-char get_key(void)
+char get_key()
 {
     uint16_t key = 0;
 
@@ -105,7 +105,6 @@ static void keyboard(t_registers regs)
     (void)regs;
     char key;
     key = get_key();
-    k_putchar(key, VGA_COLOR_GREEN);
     if (key != 0)
         last = key;
 }

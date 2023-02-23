@@ -54,12 +54,12 @@ void get_line(char *buffer, unsigned int buffer_limit)
             }
             continue;
         }
-        else if (key == '\n')
+        if (key == '\n')
         {
             k_putchar(key, VGA_COLOR_WHITE);
             return;
         }
-        else if (GET_STATUS(keystatus_getter(), CONTROL_BIT))
+        if (GET_STATUS(keystatus_getter(), CONTROL_BIT))
         {
             if (key == 'l')
             {
@@ -68,7 +68,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
                 return;
             }
         }
-        else if (key == '\b')
+        if (key == '\b')
         {
             if (k_strlen(buffer) > 0 && i > 0)
             {
@@ -78,7 +78,9 @@ void get_line(char *buffer, unsigned int buffer_limit)
                 move_left_buffer(buffer, buffer_limit, i);
             }
         }
-        else {
+        else
+        {
+            k_putchar("A", VGA_COLOR_WHITE);
             k_putchar(key, VGA_COLOR_WHITE);
             move_right_buffer(buffer, buffer_limit, i);
             buffer[i] = key;
