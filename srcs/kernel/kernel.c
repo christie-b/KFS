@@ -1,5 +1,7 @@
 #include "kernel.h"
 #include "handler/handler.h"
+#include "keyboard/keyboard.h"
+#include "shell/shell.h"
 /* Check if the compiler thinks you are targeting the wrong operating system. */
 // #if defined(__linux__)
 // #error "You are not using a cross-compiler, you will most certainly run into trouble"
@@ -10,6 +12,7 @@
 #error "This tutorial needs to be compiled with a ix86-elf compiler"
 #endif
 
+/*
 // Set la couleur de la police (fg) et du background (bg) dans un seul int8
 static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) 
 {
@@ -46,11 +49,11 @@ void terminal_initialize(void)
 	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
 	terminal_buffer = (uint16_t*) 0xB8000; // Aucune idee pourquoi ca c'est la
 	// J'ai trouvé ca sur internet 
-	/*
+	
 	0xb800 is usually mapped to text mode video memory.
 	Writing to this location overwrites what is displayed on screen
 	(Assuming text mode and assuming the mapped address is not changed)
-	*/
+	
 
 	//Ensuite on remplit le buffer d'espaces (chacun des 80 caracteres des 25 lignes disponibles)
 	for (size_t y = 0; y < VGA_HEIGHT; y++) {
@@ -96,6 +99,7 @@ void terminal_writestring(const char* data)
 {
 	terminal_write(data, strlen(data));
 }
+*/
  
 void kernel_main(void) 
 {
