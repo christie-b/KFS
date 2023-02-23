@@ -99,12 +99,12 @@ void terminal_writestring(const char* data)
  
 void kernel_main(void) 
 {
-	index = 0;
-
-	//terminal_initialize();
-	
+	clear_screen();
+	k_print("CLEAR SCREEN");
 	init_idt();
- 	//enable_interrupts();
+	k_print("INIT IDT");
 	init_keyboard();
+	k_print("INIT KEYBOARD ");
 	init_shell();
+	k_print("INIT SHELL");
 }
