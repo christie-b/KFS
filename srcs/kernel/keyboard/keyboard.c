@@ -100,8 +100,9 @@ char get_key(void)
     return keyboard_mapping[key];
 }
 
-static void keyboard()
+static void keyboard(t_registers regs)
 {
+    (void)regs
     char key;
     key = get_key();
     if (key != 0)
