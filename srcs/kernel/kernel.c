@@ -104,7 +104,7 @@ void kernel_main(void)
 	//terminal_initialize();
 	
 	init_idt();
- 	enable_interrupts();
+ 	//enable_interrupts();
 	init_keyboard();
 	init_shell();
 }
