@@ -97,6 +97,7 @@ void init_shell()
     while (1)
     {
         k_putstr("42>", VGA_COLOR_RED);
+        move_cursor_right(4);
         k_memset(buffer, 0, 256);
         get_line(buffer, 256);
     }

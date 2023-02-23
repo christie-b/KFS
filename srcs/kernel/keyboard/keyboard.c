@@ -103,12 +103,9 @@ char get_key(void)
 static void keyboard()
 {
     char key;
-    while (true)
-    {
-        key = get_key();
-        if (key != 0)
-            last = key;
-    }
+    key = get_key();
+    if (key != 0)
+        last = key;
 }
 
 

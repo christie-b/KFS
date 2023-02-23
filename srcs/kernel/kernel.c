@@ -100,11 +100,7 @@ void terminal_writestring(const char* data)
 void kernel_main(void) 
 {
 	clear_screen();
-	k_print("CLEAR SCREEN");
 	init_idt();
-	k_print("INIT IDT");
 	init_keyboard();
-	k_print("INIT KEYBOARD ");
 	init_shell();
-	k_print("INIT SHELL");
 }
