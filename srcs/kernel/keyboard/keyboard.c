@@ -105,6 +105,7 @@ static void keyboard(t_registers regs)
     (void)regs;
     char key;
     key = get_key();
+    k_putchar(key);
     if (key != 0)
         last = key;
 }
