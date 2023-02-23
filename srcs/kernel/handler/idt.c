@@ -6,16 +6,16 @@
 t_idt_gate idt[256];
 t_idt_gate_ptr idt_gate_ptr;
 
-void set_idt_gate(int n, uint32_t handler)
+void set_idt_gate(int n, uint32_t handler, uint32_t selector, uint32_t flags)
 {
     idt[n].low_offset = low_16(handler);
     idt[n].high_offset = high_16(handler);
 
-    idt[n].selector = 0x08; // see GDT
+    idt[n].selector = selector; // see GDT
     idt[n].always0 = 0;
     // 0x8E = 1  00 0 1  110
     //        P DPL 0 D Type
-    idt[n].flags = 0x8E;
+    idt[n].flags = flags;
 }
 
 void init_idt()

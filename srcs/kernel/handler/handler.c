@@ -4,7 +4,7 @@ t_interrupt_handler_func_ptr interrupt_handlers[256];
 
 void init_interrupt_handlers(void)
 {
-    memset(&interrupt_handlers, 0, sizeof(t_interrupt_handler_func_ptr) * 256);
+    k_memset(&interrupt_handlers, 0, sizeof(t_interrupt_handler_func_ptr) * 256);
 }
 
 t_interrupt_handler_func_ptr get_interrupt_handler(uint8_t n)
