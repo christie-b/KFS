@@ -27,10 +27,13 @@ build:
 	# nasm -felf32 ${KERNEL} -o build/kernel.o
 	# i686-elf-gcc -c kernel.c -o kernel.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 	gcc -m32 ${FLAGS} -c ${KERNEL} -o build/kernel.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/cursor/cursor.c -o build/cursor.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/io.c -o build/io.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/keyboard.c -o build/keyboard.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/source.c -o build/source.o
-	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/keyboard.o build/source.o build/io.o -nostdlib
+	gcc -m32 ${FLAGS} -c srcs/kernel/keyboard/keyboard.c -o build/keyboard.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/kfunctions/kfunctions.c -o build/kfunctions.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/shell/shell.c -o build/shell.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/vga/vga.c -o build/vga.o
+	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/cursor.o build/io.o build/keyboard.o build/kfunctions.o build/shell.o build/vga.o -nostdlib
 	# ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/keyboard.o -nostdlib
 
 

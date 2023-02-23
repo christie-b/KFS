@@ -1,4 +1,4 @@
-//https://wiki.osdev.org/Text_Mode_Cursor
+#include "cursor.h"
 
 uint16_t get_cursor_pos()
 {
@@ -17,3 +17,5 @@ void set_cursor_pos(uint16_t pos)
     outb(0x3D4, 15);
     outb(0x3D5, pos);
 }
+
+//https://wiki.osdev.org/Text_Mode_Cursor

@@ -1,6 +1,8 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H 
 
+# include "kernel.h"
+
 # define RELEASED(keycode) keycode & 0x80
 # define GET_STATUS(status, key) (status >> key) & 1
 # define SET_STATUS(status, key) status ^= (-1 ^ status) & (1 << key)
@@ -16,21 +18,17 @@
 # define LEFT_ARROW             -10
 # define RIGHT_ARROW            -11
 
-#define BLANK ' ' | (((BLACK << 4) | (WHITE & 0x0F)) << 8)
+# define BLANK ' ' | (((BLACK << 4) | (WHITE & 0x0F)) << 8)
 
-uint16_t keyboard_handler();
-char get_key(void);
-static void keyboard();
-char last_char();
-void clear_previous_char();
-void set_vga_index(unsigned int index);
-static void move_right_buffer(char *buffer, int size, int index);
-static void move_left_buffer(char *buffer, int size, int index);
-void get_line(char *buffer, unsigned int buffer_limit);
-char init_keyboard();
+char            last_char();
+char            keystatus_getter();
+uint16_t        keyboard_handler();
+char            get_key();
+static void     keyboard();
+void            init_keyboard();
+
+#endif
 
 //https://forum.osdev.org/viewtopic.php?f=1&t=28437#:~:text=To%20get%20input%20from%20the,to%20terminate%20the%20interrupt%20cleanly.
 //https://wiki.osdev.org/Text_Mode_Cursor
 //https://wiki.osdev.org/Creating_A_Shell
-
-#endif

@@ -3,9 +3,6 @@
 #include <stdint.h>
 
 #include "kernel.h"
-#include "source.h"
-#include "keyboard.h"
-
  
 /* Check if the compiler thinks you are targeting the wrong operating system. */
 // #if defined(__linux__)
@@ -107,54 +104,15 @@ void terminal_writestring(const char* data)
 void kernel_main(void) 
 {
 	index = 0;
-	/* Initialize terminal interface */
-	terminal_initialize();
 
-	// terminal_writestring("hello\n");
-    print_string("42\n", VGA_COLOR_RED);
-    print_string("42\n", VGA_COLOR_BLUE);
-	//On pourrait aussi
-	//terminal_write("42\n", strlen("42\n")); ou stocker la chaine dans une var
+	terminal_initialize();
+	
+    k_putstr("42\n", VGA_COLOR_RED);
+    k_putstr("42\n", VGA_COLOR_BLUE);
+
 	while (1)
 	{
 		keyboard();
         init_keyboard();
     }
-    // print_string(" ___   ___    _______     \n", RED);
-    // print_string("\\|\\  \\ |\\  \\  /  ___  \\    \n", RED);
-    // print_string("\\ \\  \\_\\  \\/__/|_/  /|   \n", RED);
-    // print_string(" \\ \\______  \\__|//  / /   \n", RED);
-    // print_string("  \\|_____|\\  \\  /  /_/__  \n", RED);
-    // print_string("         \\ \\__\\|\\________\\n", RED);
-    // print_string("          \\|__| \\|_______|\n", RED);
-
 }
-
-
-
-
-
-
-// void kernel_main(void)
-// {
-
-//     terminal_buffer = (unsigned short*)VGA_ADDRESS;
-//     vga_index = 0;
-
-//     clear_screen();
-//     print_string("Hello world!", YELLOW);
-//     vga_index = 80;
-//     print_string("Version 1", RED);
-//     vga_index = 160;
-//     print_char('b', RED);
-//     vga_index = 240;
-//     while (1) {
-
-
-//         keyboard_handler();
-
-
-//     }
-
-//     return;
-// }
