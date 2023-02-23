@@ -18,7 +18,7 @@
 # define LEFT_ARROW             -10
 # define RIGHT_ARROW            -11
 
-# define BLANK ' ' | (((BLACK << 4) | (WHITE & 0x0F)) << 8)
+# define BLANK ' ' | (((VGA_COLOR_BLACK << 4) | (VGA_COLOR_WHITE & 0x0F)) << 8)
 
 char            last_char();
 char            keystatus_getter();

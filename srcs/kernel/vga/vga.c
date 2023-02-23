@@ -40,12 +40,40 @@ void clear_previous_char()
     }
 }
 
-void move_right(int nb)
+void move_right(void)
+{
+    unsigned int last;
+
+    last = VGA_COUNT;
+    while (last > vga_index)
+    {
+        terminal_buffer[last] = BLANK;
+        terminal_buffer[last] = terminal_buffer[last - 1];
+        last--;
+    }
+
+}
+
+void move_left(void)
+{
+    unsigned int cur;
+
+    cur = vga_index;
+    while (cur < VGA_COUNT)
+    {
+        terminal_buffer[cur] = BLANK;
+        terminal_buffer[cur] = terminal_buffer[cur + 1];
+        cur++;
+    }
+
+}
+
+void move_cursor_right(int nb)
 {
     set_vga_index(vga_index + nb);
 }
 
-void move_left(int nb)
+void move_cursor_left(int nb)
 {
     set_vga_index(vga_index - nb);
 }
