@@ -102,7 +102,7 @@ char get_key(void)
 
 static void keyboard(t_registers regs)
 {
-    (void)regs
+    (void)regs;
     char key;
     key = get_key();
     if (key != 0)
