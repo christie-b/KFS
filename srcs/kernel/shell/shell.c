@@ -27,7 +27,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
     char                key = 0;
     unsigned int        i = 0;
 
-    while (true)
+    while (1)
     {
         key = last_char();
         if (key == 0)
