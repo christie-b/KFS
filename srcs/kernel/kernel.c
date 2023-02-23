@@ -109,10 +109,5 @@ void kernel_main(void)
 	
     k_putstr("42\n", VGA_COLOR_RED);
     k_putstr("42\n", VGA_COLOR_BLUE);
-
-	while (1)
-	{
-		keyboard();
-        init_keyboard();
-    }
+	init_keyboard();
 }

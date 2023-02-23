@@ -30,6 +30,26 @@ void clear_screen()
     set_vga_index(0);
 }
 
+void copy_line(int dst, int src)
+{
+    int     i = 0;
+    while (i < VGA_WIDTH)
+    {
+        terminal_buffer[dst + i] = terminal_buffer[src + i];
+        i++;
+    }
+}
+
+void clear_line(int line)
+{
+    int     i = 0;
+    while (i < VGA_WIDTH)
+    {
+        terminal_buffer[line + i] = BLANK;
+        i++;
+    }
+}
+
 void clear_previous_char()
 {
     if (vga_index - 1 > 0)
@@ -47,7 +67,8 @@ void scroll_up()
 
     previous_line = 0;
     i = VGA_WIDTH;
-    while (i < VGA_COUNT) {
+    while (i < VGA_COUNT)
+    {
         clear_line(previous_line);
         copy_line(previous_line, i);
         previous_line = i;
