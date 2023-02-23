@@ -1,6 +1,7 @@
 #include "shell.h"
 #include "../keyboard/keyboard.h"
 #include "../kfunctions/kfunctions.h"
+#include "../vga/vga.h"
 
 static void move_right_buffer(char *buffer, int size, int index)
 {
@@ -82,7 +83,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
         }
         else
         {
-            k_putchar("A", VGA_COLOR_WHITE);
+            k_putchar('a', VGA_COLOR_WHITE);
             k_putchar(key, VGA_COLOR_WHITE);
             move_right_buffer(buffer, buffer_limit, i);
             buffer[i] = key;
