@@ -5,9 +5,40 @@
 //https://dev.to/frosnerd/writing-my-own-keyboard-driver-16kh
 
 # include "../kernel.h"
-#pragma region HANDLER
 
-// HANDLER
+#pragma region IDT
+//https://wiki.osdev.org/Interrupt_Descriptor_Table
+typedef struct {
+    uint16_t low_offset;
+    uint16_t selector;
+    uint8_t always0;
+    uint8_t flags;
+    uint16_t high_offset;
+} __attribute__((packed))t_idt_gate;
+
+typedef struct {
+    uint16_t limit;
+    uint32_t base;
+} __attribute__((packed)) t_idt_gate_ptr;
+
+typedef struct registers {
+    // data segment selector
+    uint32_t ds;
+    // general purpose registers pushed by pusha
+    uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
+    // pushed by isr procedure
+    uint32_t int_no, err_code;
+    // pushed by CPU automatically
+    uint32_t eip, cs, eflags, useresp, ss;
+} t_registers;
+typedef void (*t_interrupt_handler_func_ptr)(t_registers);
+
+extern void idt_flush(uint32_t idt_ptr);
+void set_idt_gate(int n, uint32_t handler, uint32_t selector, uint32_t flags);
+void init_idt();
+#pragma endregion IDT
+
+#pragma region HANDLER
 void enable_interrupts();
 void disable_interrupts();
 void register_interrupt_handler(uint8_t n, t_interrupt_handler_func_ptr handler);
@@ -15,8 +46,8 @@ t_interrupt_handler_func_ptr get_interrupt_handler(uint8_t n);
 void init_interrupt_handlers();
 #pragma endregion HANDLER
 
-//https://wiki.osdev.org/Interrupt_Service_Routines
 #pragma region ISR
+//https://wiki.osdev.org/Interrupt_Service_Routines
 extern void isr0();
 extern void isr1();
 extern void isr2();
@@ -53,9 +84,9 @@ extern void isr31();
 void isr_handler(t_registers regs);
 #pragma endregion ISR
 
+#pragma region IRQ
 //https://wiki.osdev.org/Interrupts
 //https://github.com/stevej/osdev/blob/master/kernel/cpu/irq.c
-#pragma region IRQ
 extern void irq0();
 extern void irq1();
 extern void irq2();
@@ -94,42 +125,10 @@ void remap_pic();
 void irq_handler(t_registers regs);
 #pragma endregion IRQ
 
-//https://wiki.osdev.org/Interrupt_Descriptor_Table
-#pragma region IDT
-typedef struct {
-    uint16_t low_offset;
-    uint16_t selector;
-    uint8_t always0;
-    uint8_t flags;
-    uint16_t high_offset;
-} __attribute__((packed))t_idt_gate;
-
-typedef struct {
-    uint16_t limit;
-    uint32_t base;
-} __attribute__((packed)) t_idt_gate_ptr;
-
-typedef struct registers {
-    // data segment selector
-    uint32_t ds;
-    // general purpose registers pushed by pusha
-    uint32_t edi, esi, ebp, esp, ebx, edx, ecx, eax;
-    // pushed by isr procedure
-    uint32_t int_no, err_code;
-    // pushed by CPU automatically
-    uint32_t eip, cs, eflags, useresp, ss;
-} t_registers;
-typedef void (*t_interrupt_handler_func_ptr)(t_registers);
-
-extern void idt_flush(uint32_t idt_ptr);
-void set_idt_gate(int n, uint32_t handler, uint32_t selector, uint32_t flags);
-void init_idt();
-#pragma endregion IDT
-
+#pragma region GDT
 //https://wiki.osdev.org/Global_Descriptor_Table
 //https://wiki.osdev.org/GDT_Tutorial
 //https://wiki.osdev.org/Exceptions
-#pragma region GDT
 #define GDT_ADDRESS 0x00000800
 #define GDT_ENTRIES 7
 
