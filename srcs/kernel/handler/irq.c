@@ -31,7 +31,7 @@ void remap_pic()
 void irq_handler(t_registers regs)
 {
     /* Send EOI (end of interrupt) signal to the PICs */
-    if (regs.int_no < 40)
+    if (regs.int_no >= 40)
     {
         /* reset signal to slave */
         outb(0xA0, 0x20);
