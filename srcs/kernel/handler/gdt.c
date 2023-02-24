@@ -20,7 +20,7 @@ void init_gdt()
     gdt_ptr->limit = (sizeof(t_gdt_entry) * GDT_ENTRIES) - 1;
     gdt_ptr->base = ((uint32_t)(&gdt_entries));
 
-    set_gdt_entry_value(0, 0, 0, 0, 0);                // Null segment
+    set_gdt_entry_value(0, (uint32_t)0, (uint32_t)0, (uint8_t)0, (uint8_t)0);    // Null segment
     set_gdt_entry_value(1, 0, 0xFFFFFFFF, (uint8_t)GDT_CODE_PL0, (uint8_t)0xCF); // Kernel code
     set_gdt_entry_value(2, 0, 0xFFFFFFFF, (uint8_t)GDT_DATA_PL0, (uint8_t)0xCF); // Kernel data
     set_gdt_entry_value(3, 0, 0xFFFFFFFF, (uint8_t)GDT_STACK_PL0, (uint8_t)0xCF); // Kernel stack
