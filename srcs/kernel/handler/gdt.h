@@ -78,6 +78,8 @@ typedef struct  __attribute__((packed)) gdt_ptr
    uint32_t base;                // The address of the first gdt_entry_t struct.
 } t_gdt_ptr;
 
+extern void gdt_flush(uint32_t gdt_ptr);
+
 void init_gdt();
 
 #endif

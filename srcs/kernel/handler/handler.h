@@ -113,6 +113,8 @@ typedef struct registers {
 
 typedef void (*t_interrupt_handler_func_ptr)(t_registers);
 
+extern void idt_flush(uint32_t idt_ptr);
+
 // HANDLER
 void enable_interrupts();
 void disable_interrupts();

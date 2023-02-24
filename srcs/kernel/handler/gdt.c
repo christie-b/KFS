@@ -28,4 +28,6 @@ void init_gdt()
     set_gdt_entry_value(4, 0, 0xFFFFFFFF, (uint8_t)GDT_CODE_PL3, 0xCF); // User code
     set_gdt_entry_value(5, 0, 0xFFFFFFFF, (uint8_t)GDT_DATA_PL3, 0xCF); // User data
     set_gdt_entry_value(6, 0, 0xFFFFFFFF, (uint8_t)GDT_STACK_PL3, 0xCF); // User stack
+
+    gdt_flush(((uint32_t)(gdt_ptr)));
 }

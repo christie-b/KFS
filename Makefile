@@ -33,6 +33,8 @@ build:
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/irq.c -o build/irq.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/isr.c -o build/isr.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/gdt.c -o build/gdt.o
+	nasm -felf32 srcs/kernel/handler/gdt_flush.asm -o build/gdt_flush.o
+	nasm -felf32 srcs/kernel/handler/idt_flush.asm -o build/idt_flush.o
 	nasm -felf32 srcs/kernel/handler/irq.asm -o build/irqasm.o
 	nasm -felf32 srcs/kernel/handler/isr.asm -o build/israsm.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/io/io.c -o build/io.o
@@ -40,7 +42,7 @@ build:
 	gcc -m32 ${FLAGS} -c srcs/kernel/kfunctions/kfunctions.c -o build/kfunctions.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/shell/shell.c -o build/shell.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/vga/vga.c -o build/vga.o
-	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/cursor.o build/handler.o build/gdt.o build/idt.o build/irq.o build/isr.o build/irqasm.o build/israsm.o build/io.o build/keyboard.o build/kfunctions.o build/shell.o build/vga.o -nostdlib
+	ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/cursor.o build/idt_flush.o build/gdt_flush.o build/handler.o build/gdt.o build/idt.o build/irq.o build/isr.o build/irqasm.o build/israsm.o build/io.o build/keyboard.o build/kfunctions.o build/shell.o build/vga.o -nostdlib
 	# ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/keyboard.o -nostdlib
 
 
