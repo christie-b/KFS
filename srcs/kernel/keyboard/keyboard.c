@@ -115,6 +115,7 @@ static void keyboard(t_registers regs)
 
 void init_keyboard()
 {
+    k_print("init keyboard");
     register_interrupt_handler(IRQ1, &keyboard);
 }
 
