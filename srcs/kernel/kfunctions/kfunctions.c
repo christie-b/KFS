@@ -94,6 +94,8 @@ void k_putnbr(int n, unsigned char color)
 
 void k_putchar(char c, unsigned char colour)
 {
+    if (vga_index + 1 > VGA_COUNT)
+        scroll_up();
     if (c == '\n')
     {
         newline();
@@ -102,7 +104,7 @@ void k_putchar(char c, unsigned char colour)
     {
         move_right();
         terminal_buffer[vga_index] = (unsigned short) c  | (unsigned short) colour << 8;;
-        vga_index++;
+        move_cursor_right(1);
     }
 }
 
