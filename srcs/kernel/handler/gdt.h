@@ -1,7 +1,7 @@
 #ifndef GDT_H
 # define GDT_H
 
-#include "kernel.h"
+#include "../kernel.h"
 
 #define GDT_ADDRESS 0x00000800
 #define GDT_ENTRIES 7
