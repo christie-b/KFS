@@ -29,7 +29,6 @@ void remap_pic()
 
 void irq_handler(t_registers regs)
 {
-    k_print("irq");
     /* Send EOI (end of interrupt) signal to the PICs */
     if (regs.int_no >= 40)
     {

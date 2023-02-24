@@ -6,7 +6,6 @@ extern t_interrupt_handler_func_ptr interrupt_handlers[256];
 
 void isr_handler(t_registers regs)
 {
-    k_print("isr");
     if (interrupt_handlers[regs.int_no] != 0)
     {
         t_interrupt_handler_func_ptr handler = interrupt_handlers[regs.int_no];
