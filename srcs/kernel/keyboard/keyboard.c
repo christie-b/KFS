@@ -1,6 +1,7 @@
 #include "keyboard.h"
 #include "../io/io.h"
 #include "../handler/handler.h"
+# include "../kfunctions/kfunctions.h"
 
 char last = 0;
 int clicked = 0;
@@ -103,19 +104,21 @@ char get_key()
 
 static void keyboard(t_registers regs)
 {
-    (void)regs;
+    
+    uint8_t scancode = inb(0x60);
+    k_putchar(scancode);
+    /*(void)regs;
     char key;
     key = get_key();
     if (key != 0)
     {
         last = key;
-    }
+    }*/
 }
 
 
 void init_keyboard()
 {
-    k_print("init keyboard");
     register_interrupt_handler(IRQ1, &keyboard);
 }
 
