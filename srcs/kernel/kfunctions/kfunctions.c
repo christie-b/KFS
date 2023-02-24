@@ -146,19 +146,6 @@ void k_print(char *str, ...)
             {
                 k_putstr(*((char **)args++), VGA_COLOR_WHITE);
             }
-            else if (opt[i] == 'x') 
-            {
-                k_memset(tmp_addr, 0, sizeof(tmp_addr));
-                //hex_to_str(*args++, tmp_addr, sizeof(tmp_addr));
-                k_putstr(tmp_addr, VGA_COLOR_WHITE);
-            }
-            else if (opt[i] == 'p')
-            {
-                k_memset(tmp_addr, 0, sizeof(tmp_addr));
-                //hex_to_str(*args++, tmp_addr, sizeof(tmp_addr));
-                k_putstr("0x", VGA_COLOR_WHITE);
-                k_putstr(tmp_addr, VGA_COLOR_WHITE);
-            }
             else if (opt[i] == 'd')
             {
                 if (padding > 0)
