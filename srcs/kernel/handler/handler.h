@@ -87,18 +87,18 @@ extern void irq14();
 extern void irq15();
 
 
-typedef struct __attribute__((packed)) idt_gate {
+typedef struct {
     uint16_t low_offset;
     uint16_t selector;
     uint8_t always0;
     uint8_t flags;
     uint16_t high_offset;
-} t_idt_gate;
+} __attribute__((packed))t_idt_gate;
 
-typedef struct __attribute__((packed)) idt_gate_ptr {
+typedef struct {
     uint16_t limit;
     uint32_t base;
-} t_idt_gate_ptr;
+} __attribute__((packed)) t_idt_gate_ptr;
 
 typedef struct registers {
     // data segment selector
