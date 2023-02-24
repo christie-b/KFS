@@ -27,8 +27,8 @@ enum vga_color
 	VGA_COLOR_WHITE 		= 15,
 };
 
-# define VGA_WIDTH 		25
-# define VGA_HEIGHT 	80
+# define VGA_WIDTH 		80
+# define VGA_HEIGHT 	25
 # define VGA_COUNT 		25*80
 # define VGA_ADDRESS 	0xB8000
 # define BLANK ' ' | (((VGA_COLOR_BLACK << 4) | (VGA_COLOR_WHITE & 0x0F)) << 8)
