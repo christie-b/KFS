@@ -100,7 +100,7 @@ void init_shell()
     char buffer[256];
     while (1)
     {
-        k_putstr("42>", VGA_COLOR_BLUE);
+        k_putstr("42> ", VGA_COLOR_BLUE);
         k_memset(buffer, 0, 256);
         get_line(buffer, 256);
         if (k_strlen(buffer) > 0)

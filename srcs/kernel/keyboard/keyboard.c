@@ -44,7 +44,7 @@ uint16_t keyboard_handler()
     uint16_t scancode = 0;
 
     scancode = inb(0x60);
-    if (RELEASED(scancode)) // Key is realeased
+    if (RELEASED(scancode)) // Key is released
     {
         if (keyboard_mapping[GET_RELEASED_KEY(scancode)] == SHIFT)
         {
