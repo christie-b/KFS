@@ -22,15 +22,14 @@ void remap_pic()
     // ICW4
     outb(0x21, 0x01);
     outb(0xA1, 0x01);
-    k_print("FD");
     // OCW1
     outb(0x21, 0x0);
     outb(0xA1, 0x0);
-    k_print("FD");
 }
 
 void irq_handler(t_registers regs)
 {
+    k_print("irq");
     /* Send EOI (end of interrupt) signal to the PICs */
     if (regs.int_no >= 40)
     {
