@@ -1,5 +1,5 @@
 #include "gdt.h"
-#include "kfunctions.h"
+#include "../kfunctions/kfunctions.h"
 
 t_gdt_entry     gdt_entries[GDT_ENTRIES];
 t_gdt_ptr       *gdt_ptr = (t_gdt_ptr *)GDT_ADDRESS;
