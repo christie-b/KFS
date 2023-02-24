@@ -12,6 +12,7 @@ void kernel_main(void)
 {
 	clear_screen();
 	init_idt();
+	asm volatile("sti");
 	init_keyboard();
 	init_shell();
 }

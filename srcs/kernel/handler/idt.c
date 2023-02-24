@@ -22,9 +22,6 @@ void set_idt_gate(int n, uint32_t handler, uint32_t selector, uint32_t flags)
 
 void init_idt()
 {    
-    idt_gate_ptr.base  = (uint32_t)&idt;
-    idt_gate_ptr.limit = sizeof(t_idt_gate) * 256 -1;
-
     k_memset(&idt, 0, sizeof(t_idt_gate) * 256);
 
     init_interrupt_handlers();
@@ -82,5 +79,7 @@ void init_idt()
     set_idt_gate(46, (uint32_t)irq14, 0x08, 0x8E);
     set_idt_gate(47, (uint32_t)irq15, 0x08, 0x8E);
 
+    idt_gate_ptr.base  = (uint32_t)&idt;
+    idt_gate_ptr.limit = sizeof(t_idt_gate) * 256 -1;
     asm volatile("lidt (%0)" : : "r" (&idt_gate_ptr));
 }
