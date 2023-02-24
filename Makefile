@@ -29,14 +29,14 @@ build:
 	gcc -m32 ${FLAGS} -c ${KERNEL} -o build/kernel.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/cursor/cursor.c -o build/cursor.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/handler/handler.c -o build/handler.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/handler/idt.c -o build/idt.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/handler/irq.c -o build/irq.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/handler/isr.c -o build/isr.o
-	gcc -m32 ${FLAGS} -c srcs/kernel/handler/gdt.c -o build/gdt.o
-	nasm -felf32 srcs/kernel/handler/gdt_flush.asm -o build/gdt_flush.o
-	nasm -felf32 srcs/kernel/handler/idt_flush.asm -o build/idt_flush.o
-	nasm -felf32 srcs/kernel/handler/irq.asm -o build/irqasm.o
-	nasm -felf32 srcs/kernel/handler/isr.asm -o build/israsm.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/handler/idt/idt.c -o build/idt.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/handler/irq/irq.c -o build/irq.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/handler/isr/isr.c -o build/isr.o
+	gcc -m32 ${FLAGS} -c srcs/kernel/handler/gdt/gdt.c -o build/gdt.o
+	nasm -felf32 srcs/kernel/handler/gdt/gdt_flush.asm -o build/gdt_flush.o
+	nasm -felf32 srcs/kernel/handler/idt/idt_flush.asm -o build/idt_flush.o
+	nasm -felf32 srcs/kernel/handler/irq/irq.asm -o build/irqasm.o
+	nasm -felf32 srcs/kernel/handler/isr/isr.asm -o build/israsm.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/io/io.c -o build/io.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/keyboard/keyboard.c -o build/keyboard.o
 	gcc -m32 ${FLAGS} -c srcs/kernel/kfunctions/kfunctions.c -o build/kfunctions.o

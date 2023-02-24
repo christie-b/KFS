@@ -3,7 +3,6 @@
 #include "keyboard/keyboard.h"
 #include "shell/shell.h"
 #include "vga/vga.h"
-#include "handler/gdt.h"
 
 #if !defined(__i386__)
 #error "This tutorial needs to be compiled with a ix86-elf compiler"
