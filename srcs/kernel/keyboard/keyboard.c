@@ -104,9 +104,6 @@ char get_key()
 
 static void keyboard(t_registers regs)
 {
-    
-    uint8_t scancode = inb(0x60);
-    k_putchar(scancode, 15);
     (void)regs;
     char key;
     key = get_key();
