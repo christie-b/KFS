@@ -84,6 +84,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
         else
         {
             k_putchar(key, VGA_COLOR_WHITE);
+            move_right(1);
             move_right_buffer(buffer, buffer_limit, i);
             buffer[i] = key;
             if (k_strlen(buffer) == buffer_limit)
@@ -100,8 +101,16 @@ void init_shell()
     char buffer[256];
     while (1)
     {
-        k_putstr("42>", VGA_COLOR_RED);
+        k_putstr("42>", VGA_COLOR_BLUE);
         k_memset(buffer, 0, 256);
         get_line(buffer, 256);
+        
+        if (k_strlen(buffer) > 0)
+        {
+            if (k_strcmp(buffer, "clear") == 0)
+            {
+                clear_screen();
+            }
+        }
     }
 }
