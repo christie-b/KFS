@@ -56,7 +56,7 @@ iso: build
 	grub-mkrescue -o ${KERNEL_ISO} build/iso
 
 run-iso: iso
-	qemu-system-i386 -cdrom ${KERNEL_ISO}
+	qemu-system-i386 -nographic -cdrom ${KERNEL_ISO}
 
 
 clean:
