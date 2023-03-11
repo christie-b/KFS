@@ -4,7 +4,6 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM xterm
 
-
 RUN apt-get update && \
     apt-get install -y \
     build-essential \
@@ -12,11 +11,10 @@ RUN apt-get update && \
     xorriso \
     grub-pc-bin \
     qemu-system-x86 \
+    libcanberra-gtk-module libcanberra-gtk3-module \
     && rm -rf /var/lib/apt/lists/*
-	
-# RUN apt-get install -y at-spi2-core
-# RUN /usr/lib/at-spi2-core/at-spi-bus-launcher --launch-immediately
 
+ENV NO_AT_BRIDGE=1
 
 # Copy your kernel source code to the container
 COPY . /usr/src/mykernel
@@ -30,5 +28,4 @@ RUN make iso
 
 # Set the command to run when the container starts
 CMD ["qemu-system-i386", "-cdrom", "build/our_kfs.iso"]
-# CMD while true; do sleep infinity; done
 

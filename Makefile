@@ -46,18 +46,11 @@ build:
 	# ld -m elf_i386 -T ${LINKER} -o ${KERNEL_BIN} build/boot.o build/kernel.o build/keyboard.o -nostdlib
 
 
-run: build
-	qemu-system-i386 -kernel ${KERNEL_BIN} -monitor stdio
-
 iso: build
 	mkdir -p build/iso/boot/grub
 	cp srcs/grub.cfg build/iso/boot/grub
 	cp ${KERNEL_BIN} build/iso/boot
 	grub-mkrescue -o ${KERNEL_ISO} build/iso
-
-run-iso: iso
-	qemu-system-i386 -nographic -cdrom ${KERNEL_ISO}
-
 
 clean:
 	rm -rf $(KERNEL_BIN) $(KERNEL_ISO)
@@ -67,10 +60,5 @@ fclean:
 	rm -rf build/
 
 re: fclean all
-
-copy:
-	@ docker cp . kfs:/workspace
-	@ docker exec -w /workspace -it kfs /bin/bash
-	# @ docker exec -it kfs /bin/bash
 
 .PHONY: all clean fclean re
