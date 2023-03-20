@@ -148,7 +148,7 @@ void init_shell()
             {
                 reboot();
             }
-            if (k_strcmp(buffer, "halt") == 0)
+            if (k_strcmp(buffer, "halt") == 0 || k_strcmp(buffer, "shutdown") == 0)
             {
                 halt();
             }
