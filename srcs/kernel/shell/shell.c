@@ -99,7 +99,7 @@ void get_line(char *buffer, unsigned int buffer_limit)
 
 // Sends the 0xFE command to the keyboard controller, which is the command to initiate a system reset.
 // Then, it executes the cli instruction to disable interrupts and the hlt instruction to halt the CPU until the reset occurs.
-void reboot()
+void reboot(void)
 {
     uint8_t good = 0x02;
     // loop that waits until the keyboard controller is ready to receive data
@@ -114,9 +114,10 @@ void reboot()
     asm volatile("cli; hlt");
 }
 
-static inline void halt(void)
+void halt(void)
 {
     outw(0x604, 0x2000);
+    asm volatile("cli; hlt");
 }
 
 
