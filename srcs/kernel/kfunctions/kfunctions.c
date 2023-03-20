@@ -169,6 +169,31 @@ void k_putstr(char *str, unsigned char colour)
     }
 }
 
+int k_hexlen(int num) {
+    int len = 0;
+    while (num != 0) {
+        len++;
+        num /= 16;
+    }
+    return len;
+}
+
+void k_puthex(int num, unsigned char colour) {
+    char buf[9];
+    int i = 0;
+    while (num != 0) {
+        int digit = num % 16;
+        buf[i++] = (digit < 10) ? ('0' + digit) : ('a' + digit - 10);
+        num /= 16;
+    }
+    while (i < 8) {
+        buf[i++] = '0';
+    }
+    for (int j = 7; j >= 0; j--) {
+        k_putchar(buf[j], colour);
+    }
+}
+
 
 void k_print(char *str, ...)
 {
@@ -209,6 +234,18 @@ void k_print(char *str, ...)
                     }
                 }
                 k_putnbr(*args++, VGA_COLOR_WHITE);
+            }
+            else if (opt[i] == 'x')
+            {
+                if (padding > 0)
+                {
+                    while (padding - k_hexlen(*args))
+                    {
+                        k_putchar('0', VGA_COLOR_WHITE);
+                        padding--;
+                    }
+                }
+                k_puthex(*args++, VGA_COLOR_WHITE);
             }
             else
             {
