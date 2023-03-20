@@ -187,16 +187,20 @@ void k_puthex(int num, unsigned char colour)
     while (num != 0)
     {
         int digit = num % 16;
-        buf[i++] = (digit < 10) ? ('0' + digit) : ('a' + digit - 10);
+        buf[i] = (digit < 10) ? ('0' + digit) : ('a' + digit - 10);
         num /= 16;
+        i++;
     }
     while (i < 8)
     {
-        buf[i++] = '0';
+        buf[i] = '0';
+        i++;
     }
-    for (int j = 7; j >= 0; j--)
+    int j = 7;
+    while (j >= 0)
     {
         k_putchar(buf[j], colour);
+        j--;
     }
 }
 
