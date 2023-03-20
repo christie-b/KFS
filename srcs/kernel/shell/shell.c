@@ -3,6 +3,7 @@
 #include "../kfunctions/kfunctions.h"
 #include "../vga/vga.h"
 #include "../stack/stack.h"
+#include "../io/io.h"
 
 static void move_right_buffer(char *buffer, int size, int index)
 {
@@ -96,6 +97,29 @@ void get_line(char *buffer, unsigned int buffer_limit)
     }
 }
 
+// Sends the 0xFE command to the keyboard controller, which is the command to initiate a system reset.
+// Then, it executes the cli instruction to disable interrupts and the hlt instruction to halt the CPU until the reset occurs.
+void reboot()
+{
+    uint8_t good = 0x02;
+    // loop that waits until the keyboard controller is ready to receive data
+    while (good & 0x02)
+    {
+        // inb() reads the value of the status port of the keyboard controller (which is located at port 0x64) 
+        good = inb(0x64); 
+    }
+    // outb() function writes the value 0xFE to port 0x64, which is the keyboard controller's command port.
+    // the 0xFE value is a command byte that tells the keyboard controller to generate a system reset pulse
+    outb(0x64, 0xFE);
+    asm volatile("cli; hlt");
+}
+
+static inline void halt(void)
+{
+    outw(0x604, 0x2000);
+}
+
+
 void init_shell()
 {
     char buffer[256];
@@ -118,6 +142,14 @@ void init_shell()
 				GET_ESP(esp);
 				k_print("EBP: 0x%08x  ESP: 0x%08x\n", ebp, esp);
 				print_memory(esp, ebp - esp);
+            }
+            if (k_strcmp(buffer, "reboot") == 0)
+            {
+                reboot();
+            }
+            if (k_strcmp(buffer, "halt") == 0)
+            {
+                halt();
             }
         }
     }

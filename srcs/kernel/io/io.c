@@ -8,13 +8,22 @@
 // a modifier enforces val to be placed in the eax register before the asm command is issued
 // Nd allows for one-byte constant values to be assembled as constants, 
 // freeing the edx register for other cases. 
-extern void		outb(size_t port, unsigned char byte)
+extern void		outb(size_t port, uint8_t byte)
 {
 	__asm__ volatile ("outb %0, %w1;"
 		 :
 		 : "a" (byte), "Nd" (port)
 		);
 }
+
+extern void		outw(size_t port, uint16_t byte)
+{
+	__asm__ volatile ("outw %0, %w1;"
+		 :
+		 : "a" (byte), "Nd" (port)
+		);
+}
+
 
 // Receives a byte
 extern unsigned char	inb(size_t port)
