@@ -58,31 +58,81 @@ void	*k_memset(void *buffer, int ch, unsigned int len)
     return buffer;
 }
 
-void k_itoa(int n, char *str)
+#include <stddef.h>
+
+char *k_itoa_x(int num, char *str, int base)
 {
-	int		nb;
-	int		i;
-    int     len;
-    
-    nb = n;
-    len = k_intlen(n);
-    k_memset(str, 0, len + 1);
-    if (nb < 0) {
-        nb = -nb;
+    // Array of characters to use for each digit in the base
+    char digits[] = "0123456789ABCDEF";
+
+    // Keep track of whether the number is negative
+    int is_negative = 0;
+
+    // Handle negative numbers for bases other than 10
+    if (num < 0 && base != 10) {
+        num = -num;
+        is_negative = 1;
     }
-	i = len - 1;
-    if (nb == 0) {
-        str[i] = '0';
-        return;
+
+    // Handle negative numbers for base 10
+    if (num < 0 && base == 10) {
+        num = -num;
+        is_negative = 1;
     }
-	while (nb != 0)
-	{
-		str[i--] = (nb % 10) + '0';
-		nb = nb / 10;
-	}
-	if (n < 0)
-		str[i] = '-';
+
+    // Calculate the digits of the number in the given base
+    size_t i = 0;
+    do {
+        str[i++] = digits[num % base];
+        num /= base;
+    } while (num > 0);
+
+    // Add a minus sign if the number is negative
+    if (is_negative) {
+        str[i++] = '-';
+    }
+
+    // Terminate the string
+    str[i] = '\0';
+
+    // Reverse the string
+    size_t j = 0;
+    size_t len = i;
+    for (j = 0; j < len / 2; j++) {
+        char tmp = str[j];
+        str[j] = str[len - j - 1];
+        str[len - j - 1] = tmp;
+    }
+
+    return str;
 }
+
+
+    void k_itoa(int n, char *str)
+    {
+    	int		nb;
+    	int		i;
+        int     len;
+        
+        nb = n;
+        len = k_intlen(n);
+        k_memset(str, 0, len + 1);
+        if (nb < 0) {
+            nb = -nb;
+        }
+    	i = len - 1;
+        if (nb == 0) {
+            str[i] = '0';
+            return;
+        }
+    	while (nb != 0)
+    	{
+    		str[i--] = (nb % 10) + '0';
+    		nb = nb / 10;
+    	}
+    	if (n < 0)
+    		str[i] = '-';
+    }
 
 void k_putnbr(int n, unsigned char color)
 {
@@ -108,6 +158,7 @@ void k_putchar(char c, unsigned char colour)
     }
 }
 
+
 void k_putstr(char *str, unsigned char colour)
 {
     int i = 0;
@@ -117,6 +168,7 @@ void k_putstr(char *str, unsigned char colour)
         i++;
     }
 }
+
 
 void k_print(char *str, ...)
 {

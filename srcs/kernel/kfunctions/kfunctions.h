@@ -9,5 +9,7 @@ void            k_putchar(char c, unsigned char colour);
 void            k_putstr(char *str, unsigned char colour);
 void            k_print(char *str, ...);
 int		        k_strcmp(const char *s1, const char *s2);
+char			*k_itoa_x(int num, char *str, int base);
+void			k_itoa(int n, char *str);
 
 #endif

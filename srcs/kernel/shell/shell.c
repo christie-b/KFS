@@ -2,6 +2,7 @@
 #include "../keyboard/keyboard.h"
 #include "../kfunctions/kfunctions.h"
 #include "../vga/vga.h"
+#include "../stack/stack.h"
 
 static void move_right_buffer(char *buffer, int size, int index)
 {
@@ -98,9 +99,11 @@ void get_line(char *buffer, unsigned int buffer_limit)
 void init_shell()
 {
     char buffer[256];
+    uintptr_t ebp;
+	uintptr_t esp;
     while (1)
     {
-        k_putstr("42> ", VGA_COLOR_BLUE);
+        k_putstr("42> ", VGA_COLOR_CYAN);
         k_memset(buffer, 0, 256);
         get_line(buffer, 256);
         if (k_strlen(buffer) > 0)
@@ -108,6 +111,13 @@ void init_shell()
             if (k_strcmp(buffer, "clear") == 0)
             {
                 clear_screen();
+            }
+            if (k_strcmp(buffer, "stack") == 0)
+            {
+                GET_EBP(ebp);
+				GET_ESP(esp);
+				k_print("EBP: 0x%08X  ESP: 0x%08X\n", ebp, esp);
+				print_memory(esp, ebp - esp);
             }
         }
     }
