@@ -141,7 +141,6 @@ void init_shell()
             {
                 GET_EBP(ebp);
 				GET_ESP(esp);
-				k_print("EBP: 0x%08x  ESP: 0x%08x\n", ebp, esp);
 				print_memory(esp, ebp - esp);
             }
             if (k_strcmp(buffer, "reboot") == 0)

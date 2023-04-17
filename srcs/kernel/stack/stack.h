@@ -12,5 +12,6 @@
 #define GET_ESP(x) asm volatile("mov %%esp, %0" : "=r"(x) ::)
 
 void print_memory(const uintptr_t addr, size_t size);
+void kdump(uint32_t addr, int limit);
 
 #endif
