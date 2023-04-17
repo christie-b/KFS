@@ -120,6 +120,36 @@ void halt(void)
     asm volatile("cli; hlt");
 }
 
+void help(void)
+{
+
+    k_putstr("         _  _  ____  \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("        | || ||___ \\ \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("        | || |_ __) |\n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("        |__   _/ __/ \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("           |_||_____|\n", VGA_COLOR_LIGHT_BLUE);
+              
+    k_putstr("Hello and Welcome to our KFS !\n\n", VGA_COLOR_LIGHT_BLUE);
+    k_print("Here is a list of the available commands:\n");
+    k_print("- ");
+    k_putstr("stack", VGA_COLOR_CYAN);
+    k_print(": print the stack\n");
+    k_print("- ");
+    k_putstr("clear", VGA_COLOR_CYAN);
+    k_print(": clear the screen\n");
+    k_print("- ");
+    k_putstr("halt", VGA_COLOR_CYAN);
+    k_print("/");
+    k_putstr("shutdown", VGA_COLOR_CYAN);
+    k_print(": shut down the system\n");
+    k_print("- ");
+    k_putstr("reboot", VGA_COLOR_CYAN);
+    k_print(": reboot the system\n");
+    k_print("- ");
+    k_putstr("help", VGA_COLOR_CYAN);
+    k_print(": show the available commands\n");
+}
+
 
 void init_shell()
 {
@@ -128,7 +158,7 @@ void init_shell()
 	uintptr_t esp;
     while (1)
     {
-        k_putstr("42> ", VGA_COLOR_CYAN);
+        k_putstr("42> ", VGA_COLOR_LIGHT_BLUE);
         k_memset(buffer, 0, 256);
         get_line(buffer, 256);
         if (k_strlen(buffer) > 0)
@@ -150,6 +180,10 @@ void init_shell()
             if (k_strcmp(buffer, "halt") == 0 || k_strcmp(buffer, "shutdown") == 0)
             {
                 halt();
+            }
+            if (k_strcmp(buffer, "help") == 0)
+            {
+                help();
             }
         }
     }
