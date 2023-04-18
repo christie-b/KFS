@@ -122,13 +122,16 @@ void halt(void)
 
 void help(void)
 {
+    k_print("\n");
+    k_putstr(":::    ::: :::::::::: ::::::::  \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr(":+:   :+:  :+:       :+:    :+: \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("+:+  +:+   +:+       +:+        \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("+#++:++    :#::+::#  +#++:++#++ \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("+#+  +#+   +#+              +#+ \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("#+#   #+#  #+#       #+#    #+# \n", VGA_COLOR_LIGHT_BLUE);
+    k_putstr("###    ### ###        ########  \n", VGA_COLOR_LIGHT_BLUE);
+    k_print("\n");
 
-    k_putstr("         _  _  ____  \n", VGA_COLOR_LIGHT_BLUE);
-    k_putstr("        | || ||___ \\ \n", VGA_COLOR_LIGHT_BLUE);
-    k_putstr("        | || |_ __) |\n", VGA_COLOR_LIGHT_BLUE);
-    k_putstr("        |__   _/ __/ \n", VGA_COLOR_LIGHT_BLUE);
-    k_putstr("           |_||_____|\n", VGA_COLOR_LIGHT_BLUE);
-              
     k_putstr("Hello and Welcome to our KFS !\n\n", VGA_COLOR_LIGHT_BLUE);
     k_print("Here is a list of the available commands:\n");
     k_print("- ");
